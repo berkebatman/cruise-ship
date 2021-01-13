@@ -11,8 +11,8 @@ Ship.prototype.setSail = function () {
     this.currentPort = 0 // falsy value
 }
 
-Ship.prototype.dock = function (Port) { 
-    this.currentPort = Port.name; 
+Ship.prototype.dock = function (port) { 
+    this.currentPort = port;
 }
 let girneLimani = new Port('Girne Limani')
         let testShip = new Ship(girneLimani);
