@@ -14,15 +14,10 @@ Ship.prototype.setSail = function () {
 Ship.prototype.dock = function (Port) { 
     this.currentPort = Port.name; 
 }
-
-// you will have a port and a ship should be able to dock to it
-
 let girneLimani = new Port('Girne Limani')
-let titanic = new Ship('Norway');
- titanic.setSail();
- console.log(titanic)
- titanic.dock(girneLimani)
- console.log(titanic)
+        let testShip = new Ship(girneLimani);
+        console.log(testShip.currentPort.name)
+
 
 module.exports = {
     Ship, 
