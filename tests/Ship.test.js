@@ -1,9 +1,13 @@
-const {Ship, Port} = require("../Ship");
+const { Ship } = require("../Ship");
+const { Port } = require("../Port");
+const { Itinerary } = require("../Itinerary");
 
+// test port is 'Girne Limani'
+// beforeEach 
 describe('ship constructor', () => {
     it('should create a ship object', () => {
-        let girneLimani = new Port('Girne Limani')
-        let testShip = new Ship(girneLimani);
+        let testPort = new Port('Girne Limani')
+        let testShip = new Ship(testPort);
         expect(testShip).toBeInstanceOf(Object);
     });
 
@@ -11,6 +15,7 @@ describe('ship constructor', () => {
         let testPort = new Port('Girne Limani')
         let testShip = new Ship(testPort);
         expect(testShip.currentPort).toBe(testPort);
+        expect(testShip.currentPort.name).toBe('Girne Limani');
     });
 });
 
@@ -19,24 +24,17 @@ describe('sail setter', () => {
         let testPort = new Port('Girne Limani')
         let testShip = new Ship(testPort);
         testShip.setSail();
-        expect(testShip.currentPort).toBeFalsy(); // expected behaviour is that
+        expect(testShip.previousPort).toBe(testPort); // expected behaviour is that
         // the setSail() function will set the currenPort = 0)
     });
 });
 
-describe('ship should dock to a new port', () => {
+describe('ship should dock at a different port', () => {
     it('should create a ship object, checks the port object', () => {
-        let testShip = new Ship('TEST');
-        let testPort = new Port('Girne Limani')
-        testShip.dock(testPort);
-        expect(testShip.currentPort).toBe(testPort);
+        let girneLimani = new Port ('Girne Limani')
+        let testShip = new Ship(girneLimani);
+        let mersinLimani = new Port('Tasucu')
+        testShip.dock(mersinLimani);    
+        expect(testShip.currentPort).toBe(mersinLimani);
     });
-
-    it('should create a ship object, checks the name of the port', () => {
-        let testShip = new Ship('TEST');
-        let testPort = new Port('Girne Limani')
-        testShip.dock(testPort);
-        expect(testShip.currentPort.name).toBe('Girne Limani');
-    });
-
 });

@@ -1,4 +1,4 @@
-const { Port } = require("../Ship");
+const { Port } = require("../Port");
 
 describe('Port', () => {
     it('should create a new Port object', () => {
