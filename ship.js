@@ -1,36 +1,29 @@
-
-// refactor this
-// function Ship (itenerary) {
-//    this.previousPort = null,
-//    this.currentPort = itenerary
-// }
-
-// Ship.prototype.setSail = function () { 
-//     this.previousPort = this.currentPort // falsy value
-// }
-
-// Ship.prototype.dock = function (port) { 
-//     this.currentPort = port;
-// }
-
-
 class Ship {
-    constructor(itenerary) {
-        this.previousPort = null,
-        this.currentPort = itenerary
+    constructor(Itinerary) {
+        this.itinerary = Itinerary,
+        this.currentPort = Itinerary.ports[0],
+        this.previousPort = null
     }
 
     setSail() {
-        this.previousPort = this.currentPort    
+        const itinerary = this.itinerary 
+        if (this.currentPort === itinerary.ports[itinerary.ports.length - 1]) {
+            throw new Error('End of itinerary reached');
+        } else {
+            this.previousPort = this.currentPort,
+            this.currentPort = null       
+        }        
     }
 
-    dock(port) {
-        this.currentPort = port
+    dock () {
+        const itinerary = this.itinerary;
+        const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
+      
+        this.currentPort = itinerary.ports[previousPortIndex + 1];
     }
 }
 
-// class notation 
-
+//class notation 
 module.exports = {
-    Ship, 
+    Ship,
 }
