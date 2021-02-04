@@ -11,9 +11,24 @@ describe('tests', () => {
     let akdenizTuru;
 
   beforeEach(() => {
-    girneLimani = new Port('girneLimani');
-    tasucuMersin = new Port('tasucuMersin');
-    akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
+    girneLimani = {
+        addShip: jest.fn(),
+        removeShip: jest.fn(),
+        name: 'girnelmani',
+        ships: []
+      };
+    
+      tasucuMersin = {
+        addShip: jest.fn(),
+        removeShip: jest.fn(),
+        name: 'tasucuMersin',
+        ships: []
+      };
+
+    akdenizTuru = {
+        ports: [girneLimani, tasucuMersin]
+    }
+
     testShip = new Ship(akdenizTuru);
   });
 
@@ -30,8 +45,7 @@ describe('ship constructor', () => {
     });
 
     it('the new ship created should get added to the port', () => {
-        console.log(girneLimani)
-        expect(girneLimani.ships).toContain(testShip);
+        expect(girneLimani.addShip).toHaveBeenCalledWith(testShip);
     });
 
 });
@@ -53,7 +67,7 @@ describe('ship should dock at a different port', () => {
         testShip.setSail();
         testShip.dock();  
         expect(testShip.currentPort).toEqual(tasucuMersin);
-        expect(tasucuMersin.ships).toContain(testShip);
+        expect(tasucuMersin.addShip).toHaveBeenCalledWith(testShip);
     });
 
 });

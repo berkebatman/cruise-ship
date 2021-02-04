@@ -18,10 +18,9 @@
 
         const port = this.previousPort
         const indexOfShip = port.ships.indexOf(this.previousPort)
-        console.log(indexOfShip)
-        console.log(port)
+        
         this.previousPort.ships = this.previousPort.ships.slice(1)
-        console.log(port)
+        
     }
 
     dock () {

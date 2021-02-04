@@ -1,3 +1,6 @@
+const { Ship } = require("./Ship");
+const { Itinerary } = require("./Itinerary");
+
 class Port {
     constructor(name){
         this.name = name,
@@ -9,14 +12,13 @@ class Port {
     }
     
     removeShip(ship) {
-        const ships = this.ships;
-        const indexOfShip = ships.indexOf(ship);
-        
-        
-        this.ships = this.ships.slice(indexOfShip)
+       const indexOfShip1 = this.ships.indexOf(ship);
+       
+        this.ships = this.ships.slice(1)
         
     }
 }
+
 
 module.exports = { 
     Port,

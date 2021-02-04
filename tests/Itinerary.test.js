@@ -9,10 +9,10 @@ describe('tests', () => {
     let akdenizTuru;
 
   beforeEach(() => {
-    girneLimani = new Port('girneLimani');
-    tasucuMersin = new Port('tasucuMersin');
+    girneLimani = jest.fn();
+    tasucuMersin = jest.fn();
     akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-    testShip = new Ship(akdenizTuru);
+    testShip = jest.fn();
   });
 
 
