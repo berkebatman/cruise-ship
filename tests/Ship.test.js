@@ -3,24 +3,35 @@ const { Port } = require("../Port");
 const { Itinerary } = require("../Itinerary");
 
 // test port is 'Girne Limani'
-// beforeEach 
+// beforeEach
+describe('tests', () => {
+    let testShip;
+    let girneLimani;
+    let tasucuMersin;
+    let akdenizTuru;
+
+  beforeEach(() => {
+    girneLimani = new Port('girneLimani');
+    tasucuMersin = new Port('tasucuMersin');
+    akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
+    testShip = new Ship(akdenizTuru);
+  });
+
+
 describe('ship constructor', () => {
 
     it('should create a ship object', () => {
-        let girneLimani = new Port('girneLimani');
-        let tasucuMersin = new Port('tasucuMersin');
-        let akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-        let testShip = new Ship(akdenizTuru);
         expect(testShip).toBeInstanceOf(Object);
     });
 
     it('the new ship created should have current/previous ports', () => {
-        let girneLimani = new Port('girneLimani');
-        let tasucuMersin = new Port('tasucuMersin');
-        let akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-        let testShip = new Ship(akdenizTuru);
         expect(testShip.currentPort).toBe(akdenizTuru.ports[0]);
         expect(testShip.previousPort).toBe(null);
+    });
+
+    it('the new ship created should get added to the port', () => {
+        console.log(girneLimani)
+        expect(girneLimani.ships).toContain(testShip);
     });
 
 });
@@ -28,14 +39,10 @@ describe('ship constructor', () => {
 describe('sail setter', () => {
 
     it('can set sail', () => {
-        let tasucuMersin = new Port('tasucuMersin');
-        let girneLimani = new Port('girneLimani');
-        let akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-        let testShip = new Ship(akdenizTuru);
         testShip.setSail();
-        expect(testShip.previousPort).toBe(girneLimani); // expected behaviour is that
-        // the setSail() function will set the currenPort = 0)
+        expect(testShip.previousPort).toBe(girneLimani); 
         expect(testShip.currentPort).toBeFalsy();
+        expect(girneLimani.ships).not.toContain(testShip);
     });
 
 });
@@ -43,13 +50,10 @@ describe('sail setter', () => {
 describe('ship should dock at a different port', () => {
 
     it('should dock at the next port in the itinerary', () => {
-        let tasucuMersin = new Port('tasucuMersin');
-        let girneLimani = new Port('girneLimani');
-        let akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-        let testShip = new Ship(akdenizTuru);
         testShip.setSail();
         testShip.dock();  
         expect(testShip.currentPort).toEqual(tasucuMersin);
+        expect(tasucuMersin.ships).toContain(testShip);
     });
 
 });
@@ -57,14 +61,11 @@ describe('ship should dock at a different port', () => {
 describe('Ship should not sail more than no of itineraries, edge case test', () => {
 
     it('should thow an error when sailed from final destination', () => {
-        let tasucuMersin = new Port('tasucuMersin');
-        let girneLimani = new Port('girneLimani');
-        let akdenizTuru = new Itinerary([girneLimani, tasucuMersin]);
-        let testShip = new Ship(akdenizTuru);
         testShip.setSail();
         testShip.dock();  
-        console.log(testShip)
         expect(() => testShip.setSail()).toThrowError('End of itinerary reached');
     });
+
+});
 
 });
