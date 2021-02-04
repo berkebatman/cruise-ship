@@ -12,10 +12,7 @@ class Port {
     }
     
     removeShip(ship) {
-       const indexOfShip1 = this.ships.indexOf(ship);
-       
-        this.ships = this.ships.slice(1)
-        
+        this.ships = this.ships.filter(dockedShip => dockedShip !== ship);
     }
 }
 

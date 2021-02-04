@@ -12,15 +12,10 @@
         if (this.currentPort === itinerary.ports[itinerary.ports.length - 1]) {
             throw new Error('End of itinerary reached');
         } else {
+            this.currentPort.removeShip(this);
             this.previousPort = this.currentPort,
             this.currentPort = null       
-        }        
-
-        const port = this.previousPort
-        const indexOfShip = port.ships.indexOf(this.previousPort)
-        
-        this.previousPort.ships = this.previousPort.ships.slice(1)
-        
+        }          
     }
 
     dock () {
