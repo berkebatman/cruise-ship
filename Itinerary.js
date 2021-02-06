@@ -1,5 +1,5 @@
 class Itinerary {
-    constructor(ports) {
+    constructor() {
         this.ports = ports;
     }
 }
@@ -7,5 +7,4 @@ class Itinerary {
 module.exports = {
     Itinerary,
 }
-
 
